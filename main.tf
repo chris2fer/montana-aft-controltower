@@ -19,4 +19,6 @@ module "aft" {
 
   # Optional Vars
   aft_vpc_endpoints = false
+  aft_feature_delete_default_vpcs_enabled = true
+  cloudwatch_log_group_retention = 3
 }

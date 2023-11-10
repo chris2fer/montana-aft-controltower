@@ -11,6 +11,7 @@ on:
         options:
         - plan
         - apply
+        - destroy
       logLevel:
         description: 'Log level'
         required: true
@@ -82,6 +83,7 @@ jobs:
       run: terraform fmt
 
     - name: Terraform Plan
+      if: inputs.terraform == 'apply' || inputs.terraform == 'plan'
       env:
         TF_VAR_ct_management_account_id: "${{ secrets.ct_management_account_id }}"
         TF_VAR_log_archive_account_id: "${{ secrets.log_archive_account_id }}"
@@ -97,3 +99,12 @@ jobs:
         TF_VAR_audit_account_id: "${{ secrets.audit_account_id }}"
         TF_VAR_aft_management_account_id: "${{ secrets.aft_management_account_id }}"
       run: terraform apply -auto-approve -input=false
+
+    - name: Terraform Destroy
+      if: inputs.terraform == 'destroy'
+      env:
+        TF_VAR_ct_management_account_id: "${{ secrets.ct_management_account_id }}"
+        TF_VAR_log_archive_account_id: "${{ secrets.log_archive_account_id }}"
+        TF_VAR_audit_account_id: "${{ secrets.audit_account_id }}"
+        TF_VAR_aft_management_account_id: "${{ secrets.aft_management_account_id }}"
+      run: terraform apply -destroy -auto-approve -input=false
