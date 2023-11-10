@@ -90,7 +90,7 @@ jobs:
       run: terraform plan -input=false
 
     - name: Terraform Apply
-      if: ${{ github.event.inputs.environment }} == 'apply'
+      if: ${{ github.event.inputs.terraform }} == 'apply'
       env:
         TF_VAR_ct_management_account_id: "${{ secrets.ct_management_account_id }}"
         TF_VAR_log_archive_account_id: "${{ secrets.log_archive_account_id }}"
