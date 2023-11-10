@@ -89,6 +89,11 @@ jobs:
         TF_VAR_aft_management_account_id: "${{ secrets.aft_management_account_id }}"
       run: terraform plan -input=false
 
-    # - name: Terraform Apply
-    #   if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
-    #   run: terraform apply -auto-approve -input=false
+    - name: Terraform Apply
+      if: ${{ github.event.inputs.environment }} == 'apply'
+      env:
+        TF_VAR_ct_management_account_id: "${{ secrets.ct_management_account_id }}"
+        TF_VAR_log_archive_account_id: "${{ secrets.log_archive_account_id }}"
+        TF_VAR_audit_account_id: "${{ secrets.audit_account_id }}"
+        TF_VAR_aft_management_account_id: "${{ secrets.aft_management_account_id }}"
+      run: terraform apply -auto-approve -input=false
