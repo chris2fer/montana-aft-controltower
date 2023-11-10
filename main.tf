@@ -9,7 +9,7 @@ module "aft" {
   aft_management_account_id   = var.aft_management_account_id
   ct_home_region              = "us-west-2"
   tf_backend_secondary_region = "us-east-2"
-  
+
   # VCS Vars
   vcs_provider                                  = "github"
   account_request_repo_name                     = "chris2fer/aft-account-request"
