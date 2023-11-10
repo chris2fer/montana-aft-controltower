@@ -47,6 +47,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+    - name: Create Config
+      uses: ajeffowens/jinja2-action@90dab3da2215932ea86d2875224f06bbd6798617
+      with:
+        template: provider.tf.j2
+        output_file: provider.tf
+        variables: |
+          terraform_state_bucket=${{ secrets.terraform_state_bucket }}
+          terraform_state_key=${{ secrets.terraform_state_key }}
+        
     - name: AWS credentials
       id: root_creds
       uses: aws-actions/configure-aws-credentials@v4
