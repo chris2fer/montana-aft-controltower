@@ -57,13 +57,18 @@ jobs:
           terraform_state_bucket=${{ secrets.terraform_state_bucket }}
           terraform_state_key=${{ secrets.terraform_state_key }}
         
-    - name: AWS credentials
-      id: root_creds
+    - name: AWS credentials OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ secrets.oidc_role }}
         aws-region: us-west-2
-        output-credentials: true
+
+    - name: AWS credentials OIDC
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.aft_role }}
+        role_chaining: true
+        aws-region: us-west-2
         
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
