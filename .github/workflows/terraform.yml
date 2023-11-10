@@ -67,7 +67,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ secrets.aft_role }}
-        role_chaining: true
+        role-chaining: true
         aws-region: us-west-2
         
     - name: Setup Terraform
