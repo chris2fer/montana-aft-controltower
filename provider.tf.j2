@@ -1,8 +1,8 @@
 
 terraform {
   backend "s3" {
-    bucket = "${{ vars.terraform_state_bucket }}"
-    key    = "${{ vars.terraform_state_key }}"
+    bucket = "{terraform_state_bucket}"
+    key    = "{terraform_state_key}"
     region = "us-west-2"
   }
 }
